@@ -7,9 +7,19 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  AgoraClient client = AgoraClient(
-      agoraConnectionData: AgoraConnectionData(appId: appId, channelName: "test"),
+  final AgoraClient client = AgoraClient(
+      agoraConnectionData:
+          AgoraConnectionData(appId: appId, channelName: "test"),
       enabledPermission: [Permission.camera, Permission.microphone]);
+
+  @override
+  void initState() {
+    initAgora();
+  }
+
+  void initAgora() async {
+    await client.initialize();
+  }
 
   @override
   Widget build(BuildContext context) {
